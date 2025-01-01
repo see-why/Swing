@@ -8,8 +8,9 @@ public class MainFrame extends JFrame {
 		super(name);
 
 		setLayout(new BorderLayout());
-		add(new ToolBar(), BorderLayout.NORTH);
-		add(new MainPanel(), BorderLayout.CENTER);
+		var mainPanel = new MainPanel();
+		add(new ToolBar(mainPanel), BorderLayout.NORTH);
+		add(mainPanel, BorderLayout.CENTER);
 
 		setSize(600, 400);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
