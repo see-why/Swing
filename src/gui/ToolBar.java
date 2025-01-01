@@ -9,29 +9,26 @@ import javax.swing.JToolBar;
 
 import gui.interfaces.ColorChangeListener;
 
-class ColorButtonListener implements ActionListener {
-	private final ColorChangeListener colorChanger;
-	private final Color color;
-	
-	public ColorButtonListener(ColorChangeListener colorChanger, Color color) {
-		this.colorChanger = colorChanger;
-		this.color = color;
-	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		colorChanger.changeColor(color);
-	}
-}
-
-
 public class ToolBar extends JToolBar {
 	public ToolBar(ColorChangeListener colorChanger) {
 		var redButton = new JButton("Red");
 		var blueButton = new JButton("Blue");
 		
-		redButton.addActionListener(new ColorButtonListener(colorChanger, Color.RED));
-		blueButton.addActionListener(new ColorButtonListener(colorChanger, Color.blue));
+		class ColorButtonListener implements ActionListener {
+			private final Color color;
+			
+			public ColorButtonListener(Color color) {
+				this.color = color;
+			}
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				colorChanger.changeColor(color);
+			}
+		}
+
+		redButton.addActionListener(new ColorButtonListener(Color.RED));
+		blueButton.addActionListener(new ColorButtonListener(Color.blue));
 		
 		add(redButton);
 		add(blueButton);
