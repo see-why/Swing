@@ -1,13 +1,13 @@
 package application;
 
-import javax.swing.SwingUtilities;
-
 import gui.MainFrame;
+import javax.swing.SwingUtilities;
 
 public class App {
 	public static void main(String[] args) {
 		SwingUtilities.invokeLater(() -> {
-			new MainFrame("Swing Low");
+			MainFrame frame = new MainFrame("Swing Low");
+			frame.setVisible(true);
 		});
 	}
 }
