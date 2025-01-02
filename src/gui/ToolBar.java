@@ -1,19 +1,27 @@
 package gui;
 
+import gui.interfaces.ColorChangeListener;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 import javax.swing.JToolBar;
 
-import gui.interfaces.ColorChangeListener;
-
 public class ToolBar extends JToolBar {
-	public ToolBar(ColorChangeListener colorChanger) {
+	public ColorChangeListener getColorChanger() {
+		return colorChanger;
+	}
+
+	public void setColorChanger(ColorChangeListener colorChanger) {
+		this.colorChanger = colorChanger;
+	}
+
+	private ColorChangeListener colorChanger;
+
+	public ToolBar() {
 		var redButton = new JButton("Red");
 		var blueButton = new JButton("Blue");
-		
+
 		class ColorButtonListener implements ActionListener {
 			private final Color color;
 			
