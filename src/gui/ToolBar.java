@@ -22,19 +22,8 @@ public class ToolBar extends JToolBar {
 		var redButton = new JButton("Red");
 		var blueButton = new JButton("Blue");
 
-		redButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				colorChanger.changeColor(Color.RED);
-			}
-		});
-
-		blueButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				colorChanger.changeColor(Color.BLUE);
-			}
-		});
+		redButton.addActionListener(e->colorChanger.changeColor(Color.RED));
+		blueButton.addActionListener(e->colorChanger.changeColor(Color.BLUE));
 		
 		add(redButton);
 		add(blueButton);
