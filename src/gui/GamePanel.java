@@ -10,9 +10,9 @@ public class GamePanel extends JPanel {
 	private final int CELLSIZE = 50;
 	private int leftRightMargin;
 	private int topBottomMargin;
-	private final static Color backgroundColor = Color.BLACK;
-	private final static Color foregroundColor = Color.GREEN;
-	private final static Color gridColor = Color.GRAY;
+	private final static Color BACKGROUND_COLOR = Color.BLACK;
+	private final static Color FOREGROUND_COLOR = Color.GREEN;
+	private final static Color GRID_COLOR = Color.GRAY;
 	
 	public GamePanel() {
 		setBackground(Color.RED);
@@ -28,7 +28,7 @@ public class GamePanel extends JPanel {
 		leftRightMargin = ((width % CELLSIZE) + CELLSIZE) / 2;
 		topBottomMargin = ((height % CELLSIZE) + CELLSIZE) / 2;
 
-		g2.setColor(backgroundColor);
+		g2.setColor(BACKGROUND_COLOR);
 		g2.fillRect(0, 0, width, height);
 		
 		drawGrid(g2, width, height);
@@ -36,7 +36,7 @@ public class GamePanel extends JPanel {
 	}
 	
 	private void fillCell(Graphics g2, int row, int col, boolean status) {
-		Color color = status ? foregroundColor : backgroundColor;
+		Color color = status ? FOREGROUND_COLOR : BACKGROUND_COLOR;
 		g2.setColor(color);
 		
 		int x = leftRightMargin + col * CELLSIZE;
@@ -47,7 +47,7 @@ public class GamePanel extends JPanel {
 	}
 	
 	private void drawGrid(Graphics g, int width, int height) {
-		g.setColor(gridColor);
+		g.setColor(GRID_COLOR);
 		
 		for (int x = leftRightMargin; x <= width - leftRightMargin; x += CELLSIZE) {
 			g.drawLine(x, topBottomMargin, x, height - topBottomMargin);
