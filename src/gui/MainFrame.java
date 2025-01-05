@@ -15,8 +15,9 @@ public class MainFrame extends JFrame {
 		add(toolbar, BorderLayout.NORTH);
 		add(mainPanel, BorderLayout.CENTER);
 
-		setSize(600, 400);
+		setSize(800, 600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setVisible(true);
 	}
 
 	private static final long serialVersionUID = 1L;
