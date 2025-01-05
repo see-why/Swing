@@ -8,12 +8,7 @@ public class MainFrame extends JFrame {
 		super(name);
 
 		setLayout(new BorderLayout());
-		var mainPanel = new MainPanel();
-		var toolbar = new ToolBar();
-		
-		toolbar.setColorChanger(mainPanel);
-		add(toolbar, BorderLayout.NORTH);
-		add(mainPanel, BorderLayout.CENTER);
+		add(new GamePanel(), BorderLayout.CENTER);
 
 		setSize(800, 600);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
