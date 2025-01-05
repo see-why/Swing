@@ -3,11 +3,11 @@ package models;
 public class World {
 	private int rows;
 	private int columns;
-	private boolean[][] grid;
+	private final boolean[][] grid;
 	
 	public World(int rows, int columns) {
-		this.setRows(rows);
-		this.setColumns(columns);
+		this.rows =rows;
+		this.columns = columns;
 		this.grid = new boolean[rows][columns];
 	}
 	
