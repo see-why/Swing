@@ -21,15 +21,12 @@ public class MainFrame extends JFrame {
 				
 				switch (code) {
 					case KeyEvent.VK_SPACE -> {
-						System.out.println("space bar");
 						gamePanel.next();
 					}
 					case KeyEvent.VK_BACK_SPACE -> {
-						System.out.println("back space");
 						gamePanel.clear();
 					}
 					case KeyEvent.VK_ENTER -> {
-						System.out.println("enter");
 						gamePanel.randomize();
 					}
 				}

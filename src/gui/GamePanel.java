@@ -28,10 +28,6 @@ public class GamePanel extends JPanel {
 				int row = ((e.getY() - topBottomMargin) / CELLSIZE);
 				int column = ((e.getX() - leftRightMargin) / CELLSIZE);
 				
-				System.out.printf("X: %d Y: %d \n", e.getX(), e.getY());
-				System.out.printf("row: %d column: %d \n", row, column);
-				System.out.printf("rows:: %d columns:: %d \n", world.getRows(), world.getColumns());
-				
 				if (row >= world.getRows() || column >= world.getColumns()) {
 					return;
 				}

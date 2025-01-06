@@ -95,8 +95,7 @@ public class World {
 		for (int row = 0; row < rows; row++) {
 			for (int column = 0; column < columns; column++) {
 				int neighbours = countNeighbours(row, column);
-				System.out.printf("(%d, %d) => %d \n", row, column, neighbours);
-				
+
 				/*
 				 * if neighbours count < 2, deactivate cell
 				 * if neighbours count > 3, deactivate cell
