@@ -15,14 +15,15 @@ public class GamePanel extends JPanel {
 	private int leftRightMargin;
 	private int topBottomMargin;
 
-	private final static Color backgroundColor = Color.BLACK;
-	private final static Color foregroundColor = Color.GREEN;
-	private final static Color gridColor = Color.GRAY;
+	private final static Color BACKGROUNDCOLOR = Color.BLACK;
+	private final static Color FOREGROUNDCOLOR = Color.GREEN;
+	private final static Color GRIDCOLOR = Color.GRAY;
 	
 	private World world;
 	
 	public GamePanel() {
 		addMouseListener(new MouseAdapter() {
+			@Override
 			public void mouseClicked(MouseEvent e) {
 				int row = (e.getY() - topBottomMargin) / CELLSIZE;
 				int column = (e.getX() - leftRightMargin) / CELLSIZE;
@@ -54,11 +55,8 @@ public class GamePanel extends JPanel {
 		if (world == null) {
 			world = new World(rows, columns);
 		}
-		
-		world.setCellState(0, 0, true);
-		world.setCellState(5, 5, true);
 
-		g2.setColor(backgroundColor);
+		g2.setColor(BACKGROUNDCOLOR);
 		g2.fillRect(0, 0, width, height);
 		
 		fillCell(g2, 3, 5, true);
@@ -76,7 +74,7 @@ public class GamePanel extends JPanel {
 	}
 	
 	private void fillCell(Graphics g2, int row, int col, boolean status) {
-		Color color = status ? foregroundColor : backgroundColor;
+		Color color = status ? FOREGROUNDCOLOR : BACKGROUNDCOLOR;
 		g2.setColor(color);
 		
 		int x = leftRightMargin + col * CELLSIZE;
@@ -87,7 +85,7 @@ public class GamePanel extends JPanel {
 	}
 	
 	private void drawGrid(Graphics g, int width, int height) {
-		g.setColor(gridColor);
+		g.setColor(GRIDCOLOR);
 		
 		for (int x = leftRightMargin; x <= width - leftRightMargin; x += CELLSIZE) {
 			g.drawLine(x, topBottomMargin, x, height - topBottomMargin);
