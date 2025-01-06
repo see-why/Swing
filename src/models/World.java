@@ -7,11 +7,13 @@ public class World {
 	private int rows;
 	private int columns;
 	private boolean[][] grid;
+	private boolean[][] gridBuffer;
 	
 	public World(int rows, int columns) {
 		this.rows =rows;
 		this.columns = columns;
 		this.grid = new boolean[rows][columns];
+		this.gridBuffer = new boolean[rows][columns];
 	}
 	
 	public void setCellState(int row, int column, boolean state) {
@@ -89,7 +91,7 @@ public class World {
 		
 	}
 	public void next() {
-		boolean[][] buffer = grid;
+		gridBuffer = grid;
 		for (int row = 0; row < rows; row++) {
 			for (int column = 0; column < columns; column++) {
 				int neighbours = countNeighbours(row, column);
@@ -110,11 +112,15 @@ public class World {
 					status = true;
 				}
 				
-				buffer[row][column] = status;
+				gridBuffer[row][column] = status;
 			}
  		}
 		
-		grid = buffer;
+		for (int row = 0; row < rows; row++) {
+			for (int column = 0; column < columns; column++) {
+				grid[row][column] = gridBuffer[row][column];
+			}
+		}
 	}
 	
 }
