@@ -11,7 +11,7 @@ import models.World;
 public class GamePanel extends JPanel {
 	private final static long serialVersionUID = 1L;
 
-	private final int CELLSIZE = 100;
+	private final int CELLSIZE = 20;
 	private int leftRightMargin;
 	private int topBottomMargin;
 
@@ -25,14 +25,19 @@ public class GamePanel extends JPanel {
 		addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
-				int row = (e.getY() - topBottomMargin) / CELLSIZE;
-				int column = (e.getX() - leftRightMargin) / CELLSIZE;
+				int row = ((e.getY() - topBottomMargin) / CELLSIZE);
+				int column = ((e.getX() - leftRightMargin) / CELLSIZE);
+				
+				System.out.printf("X: %d Y: %d \n", e.getX(), e.getY());
+				System.out.printf("row: %d column: %d \n", row, column);
+				System.out.printf("rows:: %d columns:: %d \n", world.getRows(), world.getColumns());
 				
 				if (row >= world.getRows() || column >= world.getColumns()) {
 					return;
 				}
 				
 				world.setCellState(row, column, !world.getCellState(row, column));
+				world.next();
 				repaint();
 			}
 			
@@ -49,8 +54,8 @@ public class GamePanel extends JPanel {
 		leftRightMargin = ((width % CELLSIZE) + CELLSIZE) / 2;
 		topBottomMargin = ((height % CELLSIZE) + CELLSIZE) / 2;
 		
-		int rows = width -  2 * leftRightMargin / CELLSIZE;
-		int columns = height - 2 * topBottomMargin / CELLSIZE;
+		int columns = (width -  (2 * leftRightMargin)) / CELLSIZE;
+		int rows = (height - (2 * topBottomMargin)) / CELLSIZE;
 		
 		if (world == null) {
 			world = new World(rows, columns);
@@ -59,7 +64,6 @@ public class GamePanel extends JPanel {
 		g2.setColor(BACKGROUNDCOLOR);
 		g2.fillRect(0, 0, width, height);
 		
-		fillCell(g2, 3, 5, true);
 		fillGrid(g2, rows, columns);
 		drawGrid(g2, width, height);
 	}
@@ -94,6 +98,21 @@ public class GamePanel extends JPanel {
 		for (int y = topBottomMargin; y <= height - topBottomMargin; y += CELLSIZE) {
 			g.drawLine(leftRightMargin, y, width - leftRightMargin, y);
 		}
+	}
+
+	public void randomize() {
+		world.randomize();
+		repaint();
+	}
+
+	public void clear() {
+		world.clear();
+		repaint();
+	}
+
+	public void next() {
+		world.next();
+		repaint();
 	}
 
 }

@@ -1,9 +1,12 @@
 package models;
 
+import java.util.Arrays;
+import java.util.Random;
+
 public class World {
 	private int rows;
 	private int columns;
-	private final boolean[][] grid;
+	private boolean[][] grid;
 	
 	public World(int rows, int columns) {
 		this.rows =rows;
@@ -33,6 +36,85 @@ public class World {
 
 	public void setColumns(int columns) {
 		this.columns = columns;
+	}
+
+	public void randomize() {
+		Random ramdom = new Random();
+		
+		for (int i = 0; i < (rows * columns) / 10; i++) {
+			int ramdomRow = ramdom.nextInt(rows);
+			int ramdomColumn = ramdom.nextInt(columns);
+			
+			setCellState(ramdomRow, ramdomColumn, true);
+		}
+		
+	}
+
+	public void clear() {
+		for (int i = 0; i < rows; i++) {
+			Arrays.fill(grid[i], false);
+		}
+	}
+	
+	public int countNeighbours(int row, int column) {
+		int neighbours = 0;
+		for (int rowOffset = -1; rowOffset < 2; rowOffset++) {
+			for (int columnOffset = -1; columnOffset < 2; columnOffset++) {
+				int rowNeighbour = row + rowOffset;
+				int columnNeighbour = column + columnOffset;
+				
+				if (rowNeighbour == 0 && columnNeighbour == 0) {
+					continue;
+				}
+				
+				if (rowNeighbour == rows && columnNeighbour == columns) {
+					continue;
+				}
+				
+				if (rowNeighbour < 0 || rowNeighbour >= rows) {
+					continue;
+				}
+				
+				if (columnNeighbour < 0 || columnNeighbour >= columns) {
+					continue;
+				}
+				
+				if (getCellState(rowNeighbour, columnNeighbour)) {
+					neighbours++;
+				}
+				
+			}
+		}
+		return neighbours;
+		
+	}
+	public void next() {
+		boolean[][] buffer = grid;
+		for (int row = 0; row < rows; row++) {
+			for (int column = 0; column < columns; column++) {
+				int neighbours = countNeighbours(row, column);
+				System.out.printf("(%d, %d) => %d \n", row, column, neighbours);
+				
+				/*
+				 * if neighbours count < 2, deactivate cell
+				 * if neighbours count > 3, deactivate cell
+				 * if neighbours count == 3, activate cell or do nothing
+				 */
+				
+				if (neighbours == 2) {
+					continue;
+				}
+				boolean status = false;
+				
+				if (neighbours == 3) {
+					status = true;
+				}
+				
+				buffer[row][column] = status;
+			}
+ 		}
+		
+		grid = buffer;
 	}
 	
 }
