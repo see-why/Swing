@@ -56,6 +56,10 @@ public class GamePanel extends JPanel {
 		if (world == null) {
 			world = new World(rows, columns);
 		}
+		
+		if (world.getRows() != rows || world.getColumns() != columns) {
+			world = new World(rows, columns);
+		}
 
 		g2.setColor(BACKGROUNDCOLOR);
 		g2.fillRect(0, 0, width, height);
