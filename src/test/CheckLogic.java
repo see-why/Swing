@@ -57,18 +57,23 @@ public class CheckLogic {
 		pathString = "newText.bin";
 		writeBinaryData(pathString);
 		System.out.println();
-		readBinaryData(pathString);
+		readBinaryData(pathString, false);
+		System.out.println();
+		readBinaryData("./bin/application/App.class", true);
 	}
 	
-	private static void readBinaryData(String pathString) {
-		try(var dos = new DataInputStream(new FileInputStream(pathString))) {
-			int value = dos.readInt();
-			byte byte1 = dos.readByte();
-			byte byte2 = dos.readByte();
-			byte byte3 = dos.readByte();
-			byte byte4 = dos.readByte();
+	private static void readBinaryData(String pathString, boolean inHexDecimal) {
+		try(var dis = new DataInputStream(new FileInputStream(pathString))) {
+			byte byte1 = dis.readByte();
+			byte byte2 = dis.readByte();
+			byte byte3 = dis.readByte();
+			byte byte4 = dis.readByte();
 			
-			System.out.println(value + "," + byte1 + "," + byte2 + "," + byte3 + "," + byte4);
+			if (inHexDecimal) {
+				System.out.println(String.format("%02X%02X%02X%02X", byte1, byte2, byte3, byte4));
+			} else {
+				System.out.println(byte1 + "," + byte2 + "," + byte3 + "," + byte4);
+			}
 		} catch (FileNotFoundException e) {
 			System.err.printf("File not found: %s \n", pathString);
 		} catch (IOException e) {
@@ -82,13 +87,11 @@ public class CheckLogic {
 			File file = new File(pathString);
 			System.out.printf("File size: %d\n", file.length());
 
-			int value = 1;
 			byte[] arr = new byte[2];
 			arr[0] = 2;
 			arr[1] = 3;
 			byte[] newArr = new byte[2];
 
-			dos.writeInt(value);
 			dos.write(arr);
 			dos.write(newArr);
 			
