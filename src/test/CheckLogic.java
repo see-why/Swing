@@ -1,5 +1,8 @@
 package test;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -33,5 +36,19 @@ public class CheckLogic {
 
 		String fileLocation = "/Users/ocyril/Documents/eclipse-workspace/Swing/text.txt";
 		System.out.println(new File(fileLocation).exists());
+		System.out.println();
+
+		try(BufferedReader reader = new BufferedReader(new FileReader(fileLocation))) {
+			String line;
+			while((line = reader.readLine()) != null) {
+				System.out.println(line);
+			}
+			
+		} catch (FileNotFoundException e) {
+			System.err.printf("File not found: %s \n", fileLocation);
+		}
+		catch (IOException e) {
+			System.err.printf("Error readind file: %s \n", fileLocation);
+		}
 	}
 }
