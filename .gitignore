@@ -1,2 +1,5 @@
 .DS_store
 /bin/
+*.bin
+*.txt
+*.csv
