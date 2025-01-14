@@ -1,9 +1,10 @@
 package models;
 
+import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Random;
 
-public class World {
+public class World  implements Serializable {
 	private int rows;
 	private int columns;
 	private boolean[][] grid;
