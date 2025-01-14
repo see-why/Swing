@@ -1,6 +1,9 @@
 package test;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import models.World;
 
@@ -17,5 +20,12 @@ public class CheckLogic {
 		for(String f: currentDirectory.list()) {
 			System.out.println(f);
 		}
+		
+		String text = "It's\nbeen\na\nwhile.";
+		Path path = Paths.get("text.txt");
+		Files.write(path, text.getBytes());
+		
+		String readText = Files.readString(path);
+		System.out.println(readText);
 	}
 }
