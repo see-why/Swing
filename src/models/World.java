@@ -12,8 +12,17 @@ public class World implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "World [rows=" + rows + ", columns=" + columns + ", grid=" + Arrays.toString(grid) + ", gridBuffer="
-				+ Arrays.toString(gridBuffer) + "]";
+		StringBuilder gridString = new StringBuilder();
+		for (boolean[] row : grid) {
+			gridString.append(Arrays.toString(row)).append("\n");
+		}
+
+		StringBuilder gridBufferString = new StringBuilder();
+		for (boolean[] row : gridBuffer) {
+			gridBufferString.append(Arrays.toString(row)).append("\n");
+		}
+		return "World [rows=" + rows + ", columns=" + columns + ", grid=" + gridString + ", gridBuffer="
+				+ gridBufferString + "]";
 	}
 
 	public World(int rows, int columns) {
