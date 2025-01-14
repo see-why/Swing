@@ -62,16 +62,20 @@ public class CheckLogic {
 		readBinaryData("./bin/application/App.class", true);
 	}
 	
-	private static void readBinaryData(String pathString, boolean inHexDecimal) {
+	private static void readBinaryData(String pathString, boolean isJavaFile) {
 		try(var dis = new DataInputStream(new FileInputStream(pathString))) {
-			byte byte1 = dis.readByte();
-			byte byte2 = dis.readByte();
-			byte byte3 = dis.readByte();
-			byte byte4 = dis.readByte();
-			
-			if (inHexDecimal) {
-				System.out.println(String.format("%02X%02X%02X%02X", byte1, byte2, byte3, byte4));
+			if(isJavaFile) {
+				int magicNumber = dis.readInt();
+				int minorVersion = dis.readUnsignedShort();
+				int majorVersion = dis.readUnsignedShort();
+				System.out.println(String.format("%02X", magicNumber));
+				System.out.println(String.format("major version: %d, minor version: %d", majorVersion, minorVersion));
 			} else {
+				byte byte1 = dis.readByte();
+				byte byte2 = dis.readByte();
+				byte byte3 = dis.readByte();
+				byte byte4 = dis.readByte();
+
 				System.out.println(byte1 + "," + byte2 + "," + byte3 + "," + byte4);
 			}
 		} catch (FileNotFoundException e) {
