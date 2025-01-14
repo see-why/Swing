@@ -1,8 +1,10 @@
 package test;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -48,7 +50,21 @@ public class CheckLogic {
 			System.err.printf("File not found: %s \n", fileLocation);
 		}
 		catch (IOException e) {
-			System.err.printf("Error readind file: %s \n", fileLocation);
+			System.err.printf("Error reading file: %s \n", fileLocation);
 		}
+		
+		try(BufferedWriter reader = new BufferedWriter(new FileWriter(fileLocation))) {
+			reader.write("Since\n");
+			reader.write("I've\n");
+			reader.write("and f**cked\n");
+			reader.write("thing up.\n");
+			
+		} catch (FileNotFoundException e) {
+			System.err.printf("File not found: %s \n", fileLocation);
+		}
+		catch (IOException e) {
+			System.err.printf("Error wrting file: %s \n", fileLocation);
+		}
+		System.out.println();
 	}
 }
