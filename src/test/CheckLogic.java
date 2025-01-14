@@ -57,6 +57,24 @@ public class CheckLogic {
 		pathString = "newText.bin";
 		writeBinaryData(pathString);
 		System.out.println();
+		readBinaryData(pathString);
+	}
+	
+	private static void readBinaryData(String pathString) {
+		try(var dos = new DataInputStream(new FileInputStream(pathString))) {
+			int value = dos.readInt();
+			byte byte1 = dos.readByte();
+			byte byte2 = dos.readByte();
+			byte byte3 = dos.readByte();
+			byte byte4 = dos.readByte();
+			
+			System.out.println(value + "," + byte1 + "," + byte2 + "," + byte3 + "," + byte4);
+		} catch (FileNotFoundException e) {
+			System.err.printf("File not found: %s \n", pathString);
+		} catch (IOException e) {
+			System.err.printf("Error reading file: %s \n", pathString);
+		}
+		System.out.println("readBinaryData Completed!");
 	}
 	
 	private static void writeBinaryData(String pathString) {
