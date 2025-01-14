@@ -2,11 +2,13 @@ package test;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,9 +20,14 @@ public class CheckLogic {
 		World world = new World(4, 7);
 		world.countNeighbours(0, 0);
 		world.countNeighbours(4, 7);
+		System.out.println(world);
+		System.out.println();
 		
 		String pathString = "text.bin";
 		serializeObject(world, pathString);
+		System.out.println();
+		
+		deserializeObject(pathString);
 		System.out.println();
 		
 		File currentDirectory = new File(".");
@@ -46,9 +53,23 @@ public class CheckLogic {
 		System.out.println();
 	}
 	
+	private static void deserializeObject(String pathString) {
+		try(var os = new ObjectInputStream(new FileInputStream(pathString))) {
+			var object = os.readObject();
+			System.out.println(object);
+		} catch (FileNotFoundException e) {
+			System.err.printf("File not found: %s \n", pathString);
+		} catch (IOException e) {
+			System.err.printf("Error reading file: %s \n", pathString);
+		} catch (ClassNotFoundException e) {
+			System.err.printf("Cannot read object from file: %s \n", pathString);
+		}
+		System.out.println("deserializeObject Completed!");
+	}
+	
 	private static void serializeObject(Object obj, String pathString) {		
 		try(var os = new ObjectOutputStream(new FileOutputStream(pathString))) {
-			os.write(obj.toString().getBytes());
+			os.writeObject(obj);
 		} catch (FileNotFoundException e) {
 			System.err.printf("File not found: %s \n", pathString);
 		} catch (IOException e) {
