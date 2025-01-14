@@ -18,10 +18,10 @@ public class CheckLogic {
 		World world = new World(4, 7);
 		world.countNeighbours(0, 0);
 		world.countNeighbours(4, 7);
-		System.out.println();
 		
 		String pathString = "text.bin";
 		serializeObject(world, pathString);
+		System.out.println();
 		
 		File currentDirectory = new File(".");
 		printDirectory(currentDirectory);
@@ -29,6 +29,7 @@ public class CheckLogic {
 
 		Path path = Paths.get("text.txt");
 		writeLines(path);
+		System.out.println();
 		
 		readLines(path);
 		System.out.println();
@@ -38,6 +39,7 @@ public class CheckLogic {
 		System.out.println();
 
 		readLineByLine(fileLocation);
+		System.out.println();
 		
 		String newFileLocation = "/Users/ocyril/Documents/eclipse-workspace/Swing/newText.txt";
 		writeLineByLine(newFileLocation);
@@ -46,12 +48,13 @@ public class CheckLogic {
 	
 	private static void serializeObject(Object obj, String pathString) {		
 		try(var os = new ObjectOutputStream(new FileOutputStream(pathString))) {
-			
+			os.write(obj.toString().getBytes());
 		} catch (FileNotFoundException e) {
 			System.err.printf("File not found: %s \n", pathString);
 		} catch (IOException e) {
 			System.err.printf("Error wrting file: %s \n", pathString);
 		}
+		System.out.println("serializeObject Completed!");
 	}
 	
 	private static void printDirectory(File currentDirectory) {
@@ -75,6 +78,7 @@ public class CheckLogic {
 		} catch (IOException e) {
 			System.err.printf("File not found: %s \n", path.toAbsolutePath());
 		}
+		System.out.println("writeLines Completed!");
 	}
 	
 	private static void readLines(Path path) {		
@@ -117,5 +121,6 @@ public class CheckLogic {
 		catch (IOException e) {
 			System.err.printf("Error wrting file: %s \n", fileLocation);
 		}
+		System.out.println("writeLineByLine Completed!");
 	}
 }
