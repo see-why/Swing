@@ -1,6 +1,8 @@
 package test;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -51,6 +53,34 @@ public class CheckLogic {
 		String newFileLocation = "/Users/ocyril/Documents/eclipse-workspace/Swing/newText.txt";
 		writeLineByLine(newFileLocation);
 		System.out.println();
+		
+		pathString = "newText.bin";
+		writeBinaryData(pathString);
+		System.out.println();
+	}
+	
+	private static void writeBinaryData(String pathString) {
+		try(var dos = new DataOutputStream(new FileOutputStream(pathString))) {
+			File file = new File(pathString);
+			System.out.printf("File size: %d\n", file.length());
+
+			int value = 1;
+			byte[] arr = new byte[2];
+			arr[0] = 2;
+			arr[1] = 3;
+			byte[] newArr = new byte[2];
+
+			dos.writeInt(value);
+			dos.write(arr);
+			dos.write(newArr);
+			
+			System.out.printf("File size now: %d\n", file.length());
+		} catch (FileNotFoundException e) {
+			System.err.printf("File not found: %s \n", pathString);
+		} catch (IOException e) {
+			System.err.printf("Error writing file: %s \n", pathString);
+		}
+		System.out.println("writeBinaryData Completed!");
 	}
 	
 	private static void deserializeObject(String pathString) {
