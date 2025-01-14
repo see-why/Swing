@@ -19,27 +19,60 @@ public class CheckLogic {
 		System.out.println();
 		
 		File currentDirectory = new File(".");
-		System.out.println(currentDirectory.getAbsolutePath());
-		System.out.println(currentDirectory.getCanonicalPath());
-		System.out.println();
-		
-		for(String f: currentDirectory.list()) {
-			System.out.println(f);
-		}
+		printDirectory(currentDirectory);
 		System.out.println();
 
-		String text = "It's\nbeen\na\nwhile.";
 		Path path = Paths.get("text.txt");
-		Files.write(path, text.getBytes());
+		writeLines(path);
 		
-		String readText = Files.readString(path);
-		System.out.println(readText);
+		readLines(path);
 		System.out.println();
 
 		String fileLocation = "/Users/ocyril/Documents/eclipse-workspace/Swing/text.txt";
 		System.out.println(new File(fileLocation).exists());
 		System.out.println();
 
+		readLineByLine(fileLocation);
+		
+		String newFileLocation = "/Users/ocyril/Documents/eclipse-workspace/Swing/newText.txt";
+		writeLineByLine(newFileLocation);
+		System.out.println();
+	}
+	
+	private static void printDirectory(File currentDirectory) {
+		System.out.println(currentDirectory.getAbsolutePath());
+		try {
+			System.out.println(currentDirectory.getCanonicalPath());
+		} catch (IOException e) {
+			System.err.printf("File not found: %s \n", currentDirectory.getAbsolutePath());
+		}
+		System.out.println();
+		
+		for(String f: currentDirectory.list()) {
+			System.out.println(f);
+		}
+	}
+	
+	private static void writeLines(Path path) {
+		String text = "It's\nbeen\na\nwhile.";
+		try {
+			Files.write(path, text.getBytes());
+		} catch (IOException e) {
+			System.err.printf("File not found: %s \n", path.toAbsolutePath());
+		}
+	}
+	
+	private static void readLines(Path path) {		
+		String readText;
+		try {
+			readText = Files.readString(path);
+			System.out.println(readText);
+		} catch (IOException e) {
+			System.err.printf("File not found: %s \n", path.toAbsolutePath());
+		}
+	}
+	
+	private static void readLineByLine(String fileLocation) {
 		try(BufferedReader reader = new BufferedReader(new FileReader(fileLocation))) {
 			String line;
 			while((line = reader.readLine()) != null) {
@@ -53,11 +86,15 @@ public class CheckLogic {
 			System.err.printf("Error reading file: %s \n", fileLocation);
 		}
 		
+	}
+	
+	private static void writeLineByLine(String fileLocation) {
 		try(BufferedWriter reader = new BufferedWriter(new FileWriter(fileLocation))) {
 			reader.write("Since\n");
-			reader.write("I've\n");
+			reader.write("I've gone\n");
 			reader.write("and f**cked\n");
-			reader.write("thing up.\n");
+			reader.write("thing up\n");
+			reader.write("Like I always do.\n");
 			
 		} catch (FileNotFoundException e) {
 			System.err.printf("File not found: %s \n", fileLocation);
@@ -65,6 +102,5 @@ public class CheckLogic {
 		catch (IOException e) {
 			System.err.printf("Error wrting file: %s \n", fileLocation);
 		}
-		System.out.println();
 	}
 }
