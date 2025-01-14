@@ -23,42 +23,28 @@ public class CheckLogic {
 		world.countNeighbours(0, 0);
 		world.countNeighbours(4, 7);
 		System.out.println(world);
-		System.out.println();
 		
 		String pathString = "text.bin";
 		serializeObject(world, pathString);
-		System.out.println();
-		
 		deserializeObject(pathString);
-		System.out.println();
 		
 		File currentDirectory = new File(".");
 		printDirectory(currentDirectory);
-		System.out.println();
 
 		Path path = Paths.get("text.txt");
 		writeLines(path);
-		System.out.println();
-		
 		readLines(path);
-		System.out.println();
 
 		String fileLocation = "/Users/ocyril/Documents/eclipse-workspace/Swing/text.txt";
 		System.out.println(new File(fileLocation).exists());
-		System.out.println();
-
 		readLineByLine(fileLocation);
-		System.out.println();
 		
 		String newFileLocation = "/Users/ocyril/Documents/eclipse-workspace/Swing/newText.txt";
 		writeLineByLine(newFileLocation);
-		System.out.println();
 		
 		pathString = "newText.bin";
 		writeBinaryData(pathString);
-		System.out.println();
 		readBinaryData(pathString, false);
-		System.out.println();
 		readBinaryData("./bin/application/App.class", true);
 	}
 	
@@ -83,7 +69,7 @@ public class CheckLogic {
 		} catch (IOException e) {
 			System.err.printf("Error reading file: %s \n", pathString);
 		}
-		System.out.println("readBinaryData Completed!");
+		System.out.println("readBinaryData Completed! \n");
 	}
 	
 	private static void writeBinaryData(String pathString) {
@@ -105,7 +91,7 @@ public class CheckLogic {
 		} catch (IOException e) {
 			System.err.printf("Error writing file: %s \n", pathString);
 		}
-		System.out.println("writeBinaryData Completed!");
+		System.out.println("writeBinaryData Completed! \n");
 	}
 	
 	private static void deserializeObject(String pathString) {
@@ -119,7 +105,7 @@ public class CheckLogic {
 		} catch (ClassNotFoundException e) {
 			System.err.printf("Cannot read object from file: %s \n", pathString);
 		}
-		System.out.println("deserializeObject Completed!");
+		System.out.println("deserializeObject Completed! \n");
 	}
 	
 	private static void serializeObject(Object obj, String pathString) {		
@@ -130,7 +116,7 @@ public class CheckLogic {
 		} catch (IOException e) {
 			System.err.printf("Error wrting file: %s \n", pathString);
 		}
-		System.out.println("serializeObject Completed!");
+		System.out.println("serializeObject Completed! \n");
 	}
 	
 	private static void printDirectory(File currentDirectory) {
@@ -145,6 +131,7 @@ public class CheckLogic {
 		for(String f: currentDirectory.list()) {
 			System.out.println(f);
 		}
+		System.out.println();
 	}
 	
 	private static void writeLines(Path path) {
@@ -154,7 +141,7 @@ public class CheckLogic {
 		} catch (IOException e) {
 			System.err.printf("File not found: %s \n", path.toAbsolutePath());
 		}
-		System.out.println("writeLines Completed!");
+		System.out.println("writeLines Completed! \n");
 	}
 	
 	private static void readLines(Path path) {		
@@ -165,6 +152,7 @@ public class CheckLogic {
 		} catch (IOException e) {
 			System.err.printf("File not found: %s \n", path.toAbsolutePath());
 		}
+		System.out.println();
 	}
 	
 	private static void readLineByLine(String fileLocation) {
@@ -180,7 +168,7 @@ public class CheckLogic {
 		catch (IOException e) {
 			System.err.printf("Error reading file: %s \n", fileLocation);
 		}
-		
+		System.out.println();
 	}
 	
 	private static void writeLineByLine(String fileLocation) {
@@ -197,6 +185,6 @@ public class CheckLogic {
 		catch (IOException e) {
 			System.err.printf("Error wrting file: %s \n", fileLocation);
 		}
-		System.out.println("writeLineByLine Completed!");
+		System.out.println("writeLineByLine Completed! \n");
 	}
 }
