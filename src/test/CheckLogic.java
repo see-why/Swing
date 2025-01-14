@@ -3,9 +3,11 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -17,6 +19,9 @@ public class CheckLogic {
 		world.countNeighbours(0, 0);
 		world.countNeighbours(4, 7);
 		System.out.println();
+		
+		String pathString = "text.bin";
+		serializeObject(world, pathString);
 		
 		File currentDirectory = new File(".");
 		printDirectory(currentDirectory);
@@ -37,6 +42,16 @@ public class CheckLogic {
 		String newFileLocation = "/Users/ocyril/Documents/eclipse-workspace/Swing/newText.txt";
 		writeLineByLine(newFileLocation);
 		System.out.println();
+	}
+	
+	private static void serializeObject(Object obj, String pathString) {		
+		try(var os = new ObjectOutputStream(new FileOutputStream(pathString))) {
+			
+		} catch (FileNotFoundException e) {
+			System.err.printf("File not found: %s \n", pathString);
+		} catch (IOException e) {
+			System.err.printf("Error wrting file: %s \n", pathString);
+		}
 	}
 	
 	private static void printDirectory(File currentDirectory) {
