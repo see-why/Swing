@@ -46,6 +46,52 @@ public class CheckLogic {
 		writeBinaryData(pathString);
 		readBinaryData(pathString, false);
 		readBinaryData("./bin/application/App.class", true);
+		parseCsv("text.csv");
+	}
+
+	private static void parseCsv(String filePath) {
+		if(! new File(filePath).exists()) {
+			return;
+		}
+		int maxAge = Integer.MIN_VALUE;
+		int minAge = Integer.MAX_VALUE;
+		int sumAge = 0;
+		int count = 0;
+		
+		try(var bf = new BufferedReader(new FileReader(filePath))) {
+			String line;
+			while ((line = bf.readLine()) != null) {
+				String[] row = line.split(",");
+
+				if (row.length != 4) {
+					System.err.println("Line doesn't contain 4 fields" + line);
+					continue;
+				}
+				int age = Integer.parseInt(row[2]);
+
+				if (age < minAge) {
+					minAge = age;
+				}
+
+				if (age > maxAge) {
+					maxAge = age;
+				}
+				sumAge += age;
+				count++;
+			}
+			if (count == 0) {
+				System.err.println("No lines in the file");
+				return;
+			}
+		} catch (FileNotFoundException e) {
+			System.err.printf("File not found: %s \n", filePath);
+		} catch (IOException e) {
+			System.err.printf("Error reading file: %s \n", filePath);
+		}
+
+		System.out.printf("Minimum age: %d \n", minAge);
+		System.out.printf("Maximum age: %d \n", maxAge);
+		System.out.printf("Average age: %f \n", sumAge / (double)count);
 	}
 	
 	private static void readBinaryData(String pathString, boolean isJavaFile) {
