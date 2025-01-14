@@ -4,12 +4,18 @@ import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Random;
 
-public class World  implements Serializable {
+public class World implements Serializable {
 	private int rows;
 	private int columns;
 	private final boolean[][] grid;
 	private boolean[][] gridBuffer;
 	
+	@Override
+	public String toString() {
+		return "World [rows=" + rows + ", columns=" + columns + ", grid=" + Arrays.toString(grid) + ", gridBuffer="
+				+ Arrays.toString(gridBuffer) + "]";
+	}
+
 	public World(int rows, int columns) {
 		this.rows =rows;
 		this.columns = columns;
@@ -98,9 +104,9 @@ public class World  implements Serializable {
 				int neighbours = countNeighbours(row, column);
 
 				/*
-				 * if neighbours count < 2, deactivate cell
-				 * if neighbours count > 3, deactivate cell
-				 * if neighbours count == 3, activate cell or do nothing
+				 * if neighbors count < 2, deactivate cell
+				 * if neighbors count > 3, deactivate cell
+				 * if neighbors count == 3, activate cell or do nothing
 				 */
 				
 				if (neighbours == 2) {
