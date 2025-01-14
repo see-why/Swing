@@ -7,7 +7,7 @@ import java.util.Random;
 public class World  implements Serializable {
 	private int rows;
 	private int columns;
-	private boolean[][] grid;
+	private final boolean[][] grid;
 	private boolean[][] gridBuffer;
 	
 	public World(int rows, int columns) {
