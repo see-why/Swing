@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CheckLogic",
+            "request": "launch",
+            "mainClass": "test.CheckLogic",
+            "projectName": "Swing"
+        },
+        {
+            "type": "java",
             "request": "launch",
             "name": "Launch Java App"
         }
