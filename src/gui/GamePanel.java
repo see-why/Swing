@@ -6,7 +6,6 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
-
 import javax.swing.JPanel;
 import models.World;
 
@@ -35,7 +34,6 @@ public class GamePanel extends JPanel {
 				}
 				
 				world.setCellState(row, column, !world.getCellState(row, column));
-				world.next();
 				repaint();
 			}
 			
