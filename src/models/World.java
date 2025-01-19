@@ -147,7 +147,15 @@ public class World implements Serializable {
 
   public void loadGrid(File file) {
     var newGrid = (boolean[][]) serializer.deserializeObject(file.getPath());
-    System.out.println(Arrays.toString(newGrid));
+		for (int row = 0; row < rows; row++) {
+			for (int column = 0; column < columns; column++) {
+				if(row < newGrid.length && column < newGrid[row].length) {
+					grid[row][column] = newGrid[row][column];
+				} else {
+					grid[row][column] = false;
+				}
+			}
+		}
   }
 	
 }
