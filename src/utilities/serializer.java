@@ -8,10 +8,11 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 public class serializer {
-	public static void deserializeObject(String pathString) {
+	public static Object deserializeObject(String pathString) {
+		Object result = null;
 		try(var os = new ObjectInputStream(new FileInputStream(pathString))) {
-			var object = os.readObject();
-			System.out.println(object);
+			result = os.readObject();
+			System.out.println(result);
 		} catch (FileNotFoundException e) {
 			System.err.printf("File not found: %s \n", pathString);
 		} catch (IOException e) {
@@ -20,6 +21,7 @@ public class serializer {
 			System.err.printf("Cannot read object from file: %s \n", pathString);
 		}
 		System.out.println("deserializeObject Completed! \n");
+		return result;
 	}
 	
 	public static void serializeObject(Object obj, String pathString) {		
