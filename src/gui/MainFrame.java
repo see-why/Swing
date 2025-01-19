@@ -39,6 +39,7 @@ public class MainFrame extends JFrame {
 			
 			if(userChoice == JFileChooser.APPROVE_OPTION) {
 				var file = fileChooser.getSelectedFile();
+				gamePanel.save(file);
 				System.out.println(file);
 			}
 		});
