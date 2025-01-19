@@ -6,6 +6,8 @@ import java.awt.MenuBar;
 import java.awt.MenuItem;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
 public class MainFrame extends JFrame {
@@ -17,15 +19,24 @@ public class MainFrame extends JFrame {
 
 		setLayout(new BorderLayout());
 		add(gamePanel, BorderLayout.CENTER);
+		JFileChooser fileChooser = new JFileChooser();
 		
 		MenuItem openItem = new MenuItem("Open");
 		openItem.addActionListener(e -> {
-			System.out.println("open");
+			int userChoice = fileChooser.showOpenDialog(MainFrame.this);
+			
+			if(userChoice == JFileChooser.APPROVE_OPTION) {
+				System.out.println("open");
+			}
 		});
 		
 		MenuItem saveItem = new MenuItem("Save");
 		saveItem.addActionListener(e -> {
-			System.out.println("save");
+			int userChoice = fileChooser.showSaveDialog(MainFrame.this);
+			
+			if(userChoice == JFileChooser.APPROVE_OPTION) {
+				System.out.println("save");
+			}
 		});
 		
 		Menu fileMenu = new Menu("File");
