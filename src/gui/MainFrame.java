@@ -19,7 +19,14 @@ public class MainFrame extends JFrame {
 		add(gamePanel, BorderLayout.CENTER);
 		
 		MenuItem openItem = new MenuItem("Open");
+		openItem.addActionListener(e -> {
+			System.out.println("open");
+		});
+		
 		MenuItem saveItem = new MenuItem("Save");
+		saveItem.addActionListener(e -> {
+			System.out.println("save");
+		});
 		
 		Menu fileMenu = new Menu("File");
 		fileMenu.add(openItem);
