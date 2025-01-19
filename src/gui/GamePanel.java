@@ -119,4 +119,9 @@ public class GamePanel extends JPanel {
 		world.saveGrid(file);
 	}
 
+	public void open(File file) {
+		world.loadGrid(file);
+		repaint();
+	}
+
 }

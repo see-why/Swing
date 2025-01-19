@@ -1,23 +1,16 @@
 package models;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Random;
-
 import utilities.serializer;
 
 public class World implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int rows;
 	private int columns;
-	private final boolean[][] grid;
+	private boolean[][] grid;
 	private boolean[][] gridBuffer;
 	
 	@Override
@@ -151,5 +144,10 @@ public class World implements Serializable {
 	public void saveGrid(File file) {
 		serializer.serializeObject(grid, file.getPath());
 	}
+
+  public void loadGrid(File file) {
+    var newGrid = (boolean[][]) serializer.deserializeObject(file.getPath());
+    System.out.println(Arrays.toString(newGrid));
+  }
 	
 }
