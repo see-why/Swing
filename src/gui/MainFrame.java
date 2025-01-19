@@ -10,6 +10,7 @@ import java.io.File;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class MainFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -22,13 +23,19 @@ public class MainFrame extends JFrame {
 		setLayout(new BorderLayout());
 		add(gamePanel, BorderLayout.CENTER);
 		JFileChooser fileChooser = new JFileChooser();
+		var filter = new FileNameExtensionFilter("Game of Life files", "gol");
+		fileChooser.addChoosableFileFilter(filter);
+		fileChooser.setFileFilter(filter);
 		
 		MenuItem openItem = new MenuItem("Open");
 		openItem.addActionListener(e -> {
+			fileChooser.setSelectedFile(new File(defaultFile));
 			int userChoice = fileChooser.showOpenDialog(MainFrame.this);
 			
 			if(userChoice == JFileChooser.APPROVE_OPTION) {
-				System.out.println("open");
+				var file = fileChooser.getSelectedFile();
+				gamePanel.open(file);
+				System.out.println(file);
 			}
 		});
 		
