@@ -15,7 +15,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class MainFrame extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private static final GamePanel gamePanel = new GamePanel();
-	private static final String defaultFile = "gameOfLife.gol";
+	private static final String DEFAULT_FILE = "gameOfLife.gol";
 
 	public MainFrame(String name){
 		super(name);
@@ -29,7 +29,7 @@ public class MainFrame extends JFrame {
 		
 		MenuItem openItem = new MenuItem("Open");
 		openItem.addActionListener(e -> {
-			fileChooser.setSelectedFile(new File(defaultFile));
+			fileChooser.setSelectedFile(new File(DEFAULT_FILE));
 			int userChoice = fileChooser.showOpenDialog(MainFrame.this);
 			
 			if(userChoice == JFileChooser.APPROVE_OPTION) {
@@ -41,7 +41,7 @@ public class MainFrame extends JFrame {
 		
 		MenuItem saveItem = new MenuItem("Save");
 		saveItem.addActionListener(e -> {
-			fileChooser.setSelectedFile(new File(defaultFile));
+			fileChooser.setSelectedFile(new File(DEFAULT_FILE));
 			int userChoice = fileChooser.showSaveDialog(MainFrame.this);
 			
 			if(userChoice == JFileChooser.APPROVE_OPTION) {
