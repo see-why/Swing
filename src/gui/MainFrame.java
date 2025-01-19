@@ -7,7 +7,6 @@ import java.awt.MenuItem;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.File;
-
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -23,10 +22,10 @@ public class MainFrame extends JFrame {
 		setLayout(new BorderLayout());
 		add(gamePanel, BorderLayout.CENTER);
 		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setAcceptAllFileFilterUsed(false);
 		var filter = new FileNameExtensionFilter("Game of Life files", "gol");
 		fileChooser.addChoosableFileFilter(filter);
 		fileChooser.setFileFilter(filter);
-		
 		MenuItem openItem = new MenuItem("Open");
 		openItem.addActionListener(e -> {
 			fileChooser.setSelectedFile(new File(DEFAULT_FILE));
