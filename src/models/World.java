@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Random;
 
 public class World implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private int rows;
 	private int columns;
 	private final boolean[][] grid;
