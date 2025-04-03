@@ -8,7 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import javax.swing.JOptionPane;
 
-public class serializer {
+public class Serializer {
 	private static final String VALID_EXTENSION = ".gol";
 	private static void showError(String message) {
 		JOptionPane.showMessageDialog(null, message, "Error", JOptionPane.ERROR_MESSAGE);

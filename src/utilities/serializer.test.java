@@ -21,7 +21,7 @@ class SerializerTest {
 	@Test
 	void testDeserializeObjectWithNonExistentFile() {
 	    String nonExistentFilePath = "non_existent_file.gol";
-	    Object result = serializer.deserializeObject(nonExistentFilePath);
+	    Object result = Serializer.deserializeObject(nonExistentFilePath);
 	    assertNull(result);
 	}
 	
@@ -35,9 +35,9 @@ class SerializerTest {
 	    complexObject.put("key", nestedList);
 	
 	    String filePath = "complex_object.gol";
-	    serializer.serializeObject(complexObject, filePath);
+	    Serializer.serializeObject(complexObject, filePath);
 	
-	    Object deserializedObject = serializer.deserializeObject(filePath);
+	    Object deserializedObject = Serializer.deserializeObject(filePath);
 
 	    assertNotNull(deserializedObject);
 	    assertTrue(deserializedObject instanceof Map);
@@ -54,9 +54,9 @@ class SerializerTest {
 	    String testObject = "Test String";
 	    String filePath = "test_object.gol";
 	
-	    serializer.serializeObject(testObject, filePath);
+	    Serializer.serializeObject(testObject, filePath);
 
-	    Object deserializedObject = serializer.deserializeObject(filePath);
+	    Object deserializedObject = Serializer.deserializeObject(filePath);
 	
 	    assertNotNull(deserializedObject);
 	    assertTrue(deserializedObject instanceof String);
